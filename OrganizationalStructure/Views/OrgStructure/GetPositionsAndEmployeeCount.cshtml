@@ -1,0 +1,13 @@
+﻿@model IReadOnlyCollection<int>
+@if (Model is null)
+{
+    <div>
+        В отделе 0 позиций и 0 сотрудников
+    </div>
+}
+else
+{
+    <div>
+        В отделе на данный момент @Model.First() позиций и @Model.Last() сотрудников
+    </div>
+}

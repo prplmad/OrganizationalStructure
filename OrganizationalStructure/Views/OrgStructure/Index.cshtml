@@ -1,0 +1,69 @@
+﻿@model IReadOnlyCollection<string>
+
+<h3>Получение организационной структуры</h3>
+<div>
+    @using (Html.BeginForm("Index", "OrgStructure", FormMethod.Post, new { enctype = "multipart/form-data", id = "parrentDepartmentName" }))
+    {
+        <div>
+            Введите название родительского отдела:
+            <input required type="text" name="parrentDepartmentName" id="parrentDepartmentName /">
+            <div>
+                <input type="submit" value="Подтвердить" />
+            </div>
+        </div>
+    }
+</div>
+@if (Model is null)
+{
+
+}
+else
+{
+    @if (Model.Count == 0)
+    {
+        <div>
+            <br />
+            Отсутствуют связанные отделы
+        </div>
+    }
+    else
+    {
+        <br />
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>
+                        Отдел
+                    </th>
+                    <th>
+                        Родительский отдел
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var department in Model)
+                {
+                    <tr>
+                        <td width="50%">@department</td>
+                        <td width="50%">@ViewBag.Parrent</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+<br/>
+
+<h3>Получение информации по количеству сотрудников и позиций в отделе</h3>
+<div>
+    @using (Html.BeginForm("GetPositionsAndEmployeeCount", "OrgStructure", FormMethod.Post, new { enctype = "multipart/form-data", id = "DepartmentName" }))
+    {
+        <div>
+            Введите название отдела:
+            <input required type="text" name="DepartmentName" id="DepartmentName /">
+            <div>
+                <input type="submit" value="Подтвердить" />
+            </div>
+        </div>
+    }
+</div>
